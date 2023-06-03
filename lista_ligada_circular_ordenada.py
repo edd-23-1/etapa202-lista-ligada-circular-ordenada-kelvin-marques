@@ -23,7 +23,7 @@ class ListaLigadaCircularOrdenada:
     # retorna True se a lista ligada está cheia, False caso contrário
     def is_full(self) -> bool:
         # implementação do método
-        pass
+        return self.__qtdItens == self.__capacidade
 
 
     # insere um elemento na lista ligada em ordem crescente em seguida retorna True
