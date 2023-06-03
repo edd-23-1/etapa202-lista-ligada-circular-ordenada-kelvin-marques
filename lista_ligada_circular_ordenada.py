@@ -61,4 +61,4 @@ class ListaLigadaCircularOrdenada:
     # se a lista ligada estiver vazia, retorna ZERO
     def size(self) -> int:
         # implementação do método
-        pass
+        return self.__qtdItens
