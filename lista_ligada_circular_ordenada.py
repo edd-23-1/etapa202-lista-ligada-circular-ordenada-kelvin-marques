@@ -50,7 +50,7 @@ class ListaLigadaCircularOrdenada:
             if noAnterior is None:
                 novoNo.prox = self.__inicio
                 self.__inicio = novoNo
-                
+
             else:
                 novoNo.prox = noAtual
                 noAnterior.prox = novoNo
@@ -70,7 +70,27 @@ class ListaLigadaCircularOrdenada:
     # ou False caso contrário
     def contains(self, valor) -> No:
         # implementação do método
-        pass
+        if self.is_empty():
+            return False
+
+        # O nó atual como primeiro da lista
+        noAtual = self.__inicio
+
+        # Percorre a lista até encontrar novamente o primeiro nó
+        # garantindo percorrer todos os nós da lista
+        while noAtual.prox != self.__inicio:
+            # Verifica se o valor do nó noAtual é igual ao valor procurado
+            if noAtual.dado == valor:
+                return True
+            # Avançando para o prox nó da lista
+            noAtual = noAtual.prox
+
+        # Verificando o último nó da lista (primeiro nó)
+        if noAtual.dado == valor:
+            return True
+
+        # return False caso o valor(elemento) não tenha sido encontrado em nenhum nó
+        return False
 
 
     # retorna uma lista de string com valores dos elementos da lista ligada
