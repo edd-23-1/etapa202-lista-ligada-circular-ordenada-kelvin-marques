@@ -30,8 +30,33 @@ class ListaLigadaCircularOrdenada:
     # se a lista ligada estiver cheia, lança uma exceção: raise Exception("mensagem de erro")
     def add(self, valor) -> bool:
         # implementação do método
-        pass
+        if self.is_full():
+            raise Exception("Lista cheia")
+        
+        novoNo = No(valor)
 
+        if self.is_empty():
+            novoNo.prox = novoNo
+            self.__inicio = novoNo
+
+        else:
+            noAtual = self.__inicio
+            noAnterior = None
+
+            while noAtual.prox != self.__inicio and noAtual.dado < valor:
+                noAnterior = noAtual
+                noAtual = noAtual.prox
+
+            if noAnterior is None:
+                novoNo.prox = self.__inicio
+                self.__inicio = novoNo
+                
+            else:
+                novoNo.prox = noAtual
+                noAnterior.prox = novoNo
+
+        self.__qtdItens += 1
+        return True
     
     # remove um elemento da lista ligada retornando True caso ele seja removido
     # se o elemento não estiver na lista ligada, retorne False
