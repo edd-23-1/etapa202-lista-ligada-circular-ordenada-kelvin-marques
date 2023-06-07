@@ -31,7 +31,7 @@ class ListaLigadaCircularOrdenada:
     def add(self, valor) -> bool:
         # implementação do método
         if self.is_full():
-            raise Exception("Lista cheia")
+            raise Exception("Lista ligada circular cheia")
         
         novoNo = No(valor)
 
@@ -65,7 +65,7 @@ class ListaLigadaCircularOrdenada:
     def remove(self, valor) -> bool:
         # implementação do método
         if self.is_empty():
-            raise Exception("Lista vazia")
+            raise Exception("Lista ligada circular vazia")
 
         # Caso seja o primeiro elemento a ser removido
         if self.__inicio.dado == valor:
@@ -137,7 +137,25 @@ class ListaLigadaCircularOrdenada:
     # que a lista ligada está vazia e retorna uma lista vazia
     def display(self) -> list[str]:
         # implementação do método
-        pass
+        if self.__inicio is None:
+            print("Lista ligada circular vazia.")
+            return []
+        
+        # lista vazia para armazenar os elementos da lista ligada circular
+        elementos = []
+        # ponteiro inicia no nó inicio
+        pointer = self.__inicio
+        # percorre a lista e add eles na lista 'elementos'
+        while True:
+            # add o dado do nó atual na lista 'elementos'
+            elementos.append(pointer.dado)
+            # ponteiro aponta para o prox nó da lista
+            pointer = pointer.prox
+            # verificação se ponteiro agora aponta para  o nó inicio,ou seja, se percorreu a lista por completo
+            if pointer == self.__inicio:
+                break
+        # return da lista 'elementos' com os elementos da lista ligada circular
+        return elementos
     
 
     # retorna a quantidade de elementos na lista ligada
