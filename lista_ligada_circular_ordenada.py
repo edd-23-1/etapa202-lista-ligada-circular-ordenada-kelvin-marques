@@ -57,13 +57,51 @@ class ListaLigadaCircularOrdenada:
 
         self.__qtdItens += 1
         return True
-    
+
+
     # remove um elemento da lista ligada retornando True caso ele seja removido
     # se o elemento não estiver na lista ligada, retorne False
     # se a lista ligada estiver vazia, lança uma exceção: raise Exception("mensagem de erro")
     def remove(self, valor) -> bool:
         # implementação do método
-        pass
+        if self.is_empty():
+            raise Exception("Lista vazia")
+
+        # Caso seja o primeiro elemento a ser removido
+        if self.__inicio.dado == valor:
+            # Se a lista tem só um elemento
+            if self.__qtdItens == 1:
+                self.__inicio = None
+            else:
+                # Busca o último elemento
+                ultimoElemento = self.__inicio
+                while ultimoElemento.prox != self.__inicio:
+                    ultimoElemento = ultimoElemento.prox
+                # Atualiza o último elemento para ser agora o segundo
+                self.__inicio = self.__inicio.prox
+                ultimoElemento.prox = self.__inicio
+            self.__qtdItens -= 1
+            return True
+
+        # Percorre a lista ligada circular para achar o elemento
+        noAtual = self.__inicio
+        noAnterior = None
+        while noAtual.prox != self.__inicio:
+            # Se encontrar o elemento é removido
+            if noAtual.dado == valor:
+                noAnterior.prox = noAtual.prox
+                self.__qtdItens -= 1
+                return True
+            noAnterior = noAtual
+            noAtual = noAtual.prox
+
+        # Verifica o último elemento
+        if noAtual.dado == valor:
+            noAnterior.prox = self.__inicio
+            self.__qtdItens -= 1
+            return True
+
+        return False
 
 
     # retornar True caso o elemento esteja presente na lista ligada
