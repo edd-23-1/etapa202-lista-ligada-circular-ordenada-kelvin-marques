@@ -162,4 +162,16 @@ class ListaLigadaCircularOrdenada:
     # se a lista ligada estiver vazia, retorna ZERO
     def size(self) -> int:
         # implementação do método
-        return self.__qtdItens
+        count = 0
+
+        if self.is_empty():
+            return count
+
+        atual = self.__inicio
+        count += 1
+
+        while atual.prox != self.__inicio:
+            count += 1
+            atual = atual.prox
+
+        return count
