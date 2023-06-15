@@ -31,27 +31,28 @@ class ListaLigadaCircularOrdenada:
     def add(self, valor) -> bool:
         # implementação do método
         if self.is_full():
-            raise Exception("Lista ligada circular cheia")
+            raise Exception("Lista ligada cheia")
 
         novoNo = No(valor)
 
         if self.is_empty():
-            novoNo.prox = novoNo
+            novoNo.prox = novoNo 
             self.__inicio = novoNo
         else:
             noAtual = self.__inicio
             noAnterior = None
 
-            while noAtual.prox != self.__inicio and noAtual.dado < valor:
-                noAnterior = noAtual
-                noAtual = noAtual.prox
-
-            if noAnterior is None:
+            if valor <= noAtual.dado:
+                while noAtual.prox != self.__inicio:
+                    noAtual = noAtual.prox
+                noAtual.prox = novoNo
                 novoNo.prox = self.__inicio
                 self.__inicio = novoNo
             else:
-                novoNo.prox = noAtual
-                noAnterior.prox = novoNo
+                while noAtual.prox != self.__inicio and valor > noAtual.prox.dado:
+                    noAtual = noAtual.prox
+                novoNo.prox = noAtual.prox
+                noAtual.prox = novoNo
 
         self.__qtdItens += 1
         return True
