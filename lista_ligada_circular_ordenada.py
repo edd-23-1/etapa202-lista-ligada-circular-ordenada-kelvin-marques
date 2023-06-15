@@ -32,13 +32,12 @@ class ListaLigadaCircularOrdenada:
         # implementação do método
         if self.is_full():
             raise Exception("Lista ligada circular cheia")
-        
+
         novoNo = No(valor)
 
         if self.is_empty():
             novoNo.prox = novoNo
             self.__inicio = novoNo
-
         else:
             noAtual = self.__inicio
             noAnterior = None
@@ -50,7 +49,6 @@ class ListaLigadaCircularOrdenada:
             if noAnterior is None:
                 novoNo.prox = self.__inicio
                 self.__inicio = novoNo
-
             else:
                 novoNo.prox = noAtual
                 noAnterior.prox = novoNo
@@ -67,27 +65,21 @@ class ListaLigadaCircularOrdenada:
         if self.is_empty():
             raise Exception("Lista ligada circular vazia")
 
-        # Caso seja o primeiro elemento a ser removido
         if self.__inicio.dado == valor:
-            # Se a lista tem só um elemento
             if self.__qtdItens == 1:
                 self.__inicio = None
             else:
-                # Busca o último elemento
                 ultimoElemento = self.__inicio
                 while ultimoElemento.prox != self.__inicio:
                     ultimoElemento = ultimoElemento.prox
-                # Atualiza o último elemento para ser agora o segundo
                 self.__inicio = self.__inicio.prox
                 ultimoElemento.prox = self.__inicio
             self.__qtdItens -= 1
             return True
 
-        # Percorre a lista ligada circular para achar o elemento
         noAtual = self.__inicio
         noAnterior = None
         while noAtual.prox != self.__inicio:
-            # Se encontrar o elemento é removido
             if noAtual.dado == valor:
                 noAnterior.prox = noAtual.prox
                 self.__qtdItens -= 1
@@ -95,7 +87,6 @@ class ListaLigadaCircularOrdenada:
             noAnterior = noAtual
             noAtual = noAtual.prox
 
-        # Verifica o último elemento
         if noAtual.dado == valor:
             noAnterior.prox = self.__inicio
             self.__qtdItens -= 1
@@ -111,23 +102,16 @@ class ListaLigadaCircularOrdenada:
         if self.is_empty():
             return False
 
-        # O nó atual como primeiro da lista
         noAtual = self.__inicio
 
-        # Percorre a lista até encontrar novamente o primeiro nó
-        # garantindo percorrer todos os nós da lista
         while noAtual.prox != self.__inicio:
-            # Verifica se o valor do nó noAtual é igual ao valor procurado
             if noAtual.dado == valor:
                 return True
-            # Avançando para o prox nó da lista
             noAtual = noAtual.prox
 
-        # Verificando o último nó da lista (primeiro nó)
         if noAtual.dado == valor:
             return True
 
-        # return False caso o valor(elemento) não tenha sido encontrado em nenhum nó
         return False
 
 
@@ -137,24 +121,17 @@ class ListaLigadaCircularOrdenada:
     # que a lista ligada está vazia e retorna uma lista vazia
     def display(self) -> list[str]:
         # implementação do método
-        if self.__inicio is None:
+        if self.is_empty():
             print("Lista ligada circular vazia.")
             return []
-        
-        # lista vazia para armazenar os elementos da lista ligada circular
+
         elementos = []
-        # ponteiro inicia no nó inicio
         pointer = self.__inicio
-        # percorre a lista e add eles na lista 'elementos'
-        while True:
-            # add o dado do nó atual na lista 'elementos'
+        while pointer.prox != self.__inicio:  # Verifica se o ponteiro chegou novamente ao início
             elementos.append(pointer.dado)
-            # ponteiro aponta para o prox nó da lista
             pointer = pointer.prox
-            # verificação se ponteiro agora aponta para  o nó inicio,ou seja, se percorreu a lista por completo
-            if pointer == self.__inicio:
-                break
-        # return da lista 'elementos' com os elementos da lista ligada circular
+
+        elementos.append(pointer.dado)  # Adiciona o último elemento (início)
         return elementos
     
 
