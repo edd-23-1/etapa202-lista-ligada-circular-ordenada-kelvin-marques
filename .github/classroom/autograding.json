@@ -28,7 +28,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 6
+      "points": 2
     },
     {
       "name": "test4",
@@ -38,7 +38,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 6
+      "points": 4
     },
     {
       "name": "test5",
@@ -69,6 +69,36 @@
       "comparison": "included",
       "timeout": 10,
       "points": 1
+    },
+    {
+      "name": "test8",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest test/test_lista_ligada_circular.py -k test_add_remove_em_lista_circular_alterando_itens_no_inicio -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "test9",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest test/test_lista_ligada_circular.py -k test_add_remove_em_lista_circular_alterando_itens_no_fim -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "test10",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest test/test_lista_ligada_circular.py -k test_add_remove_em_lista_circular_alterando_itens_no_meio -v",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
     }
   ]
 }
