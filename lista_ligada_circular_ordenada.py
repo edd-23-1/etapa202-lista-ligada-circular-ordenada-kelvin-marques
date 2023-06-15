@@ -64,36 +64,40 @@ class ListaLigadaCircularOrdenada:
     def remove(self, valor) -> bool:
         # implementação do método
         if self.is_empty():
-            raise Exception("Lista ligada circular vazia")
+            raise Exception("Lista ligada vazia")
 
         if self.__inicio.dado == valor:
-            if self.__qtdItens == 1:
+            if self.__inicio.prox == self.__inicio:
                 self.__inicio = None
             else:
-                ultimoElemento = self.__inicio
-                while ultimoElemento.prox != self.__inicio:
-                    ultimoElemento = ultimoElemento.prox
+                noAtual = self.__inicio
+                while noAtual.prox != self.__inicio:
+                    noAtual = noAtual.prox
+                noAtual.prox = self.__inicio.prox
                 self.__inicio = self.__inicio.prox
-                ultimoElemento.prox = self.__inicio
             self.__qtdItens -= 1
             return True
 
         noAtual = self.__inicio
         noAnterior = None
-        while noAtual.prox != self.__inicio:
-            if noAtual.dado == valor:
-                noAnterior.prox = noAtual.prox
-                self.__qtdItens -= 1
-                return True
+
+        while noAtual.prox != self.__inicio and noAtual.dado != valor:
             noAnterior = noAtual
             noAtual = noAtual.prox
 
-        if noAtual.dado == valor:
-            noAnterior.prox = self.__inicio
-            self.__qtdItens -= 1
-            return True
+        if noAtual.prox == self.__inicio:
+            return False
 
-        return False
+        noAnterior.prox = noAtual.prox
+        self.__qtdItens -= 1
+
+        # Atualiza o ponteiro do último nó para o novo início da lista
+        if noAtual == self.__inicio:
+            while noAnterior.prox != self.__inicio:
+                noAnterior = noAnterior.prox
+            noAnterior.prox = self.__inicio
+
+        return True
 
 
     # retornar True caso o elemento esteja presente na lista ligada
